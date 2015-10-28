@@ -1,0 +1,38 @@
+[28-Oct-2015 02:04:49 America/Denver] PHP Warning:  include(): Failed opening 'Model.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 3
+[28-Oct-2015 02:04:49 America/Denver] PHP Fatal error:  Class 'Model' not found in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 8
+[28-Oct-2015 02:04:50 America/Denver] PHP Warning:  include(): Failed opening 'Model.php' for inclusion (include_path='.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 3
+[28-Oct-2015 02:04:50 America/Denver] PHP Fatal error:  Class 'Model' not found in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 8
+[28-Oct-2015 02:05:01 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 26
+[28-Oct-2015 06:29:02 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 33
+[28-Oct-2015 06:30:02 America/Denver] PHP Fatal error:  Class 'Model' not found in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 8
+[28-Oct-2015 06:31:42 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:31:48 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:31:49 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:31:50 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:32:54 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:34:34 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:35:14 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:35:14 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:38:59 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 41
+[28-Oct-2015 06:39:05 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 06:45:02 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 06:45:03 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 07:38:42 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 08:49:46 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:39:27 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:39:35 America/Denver] PHP Parse error:  syntax error, unexpected 'error_reporting' (T_STRING) in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 2
+[28-Oct-2015 09:39:41 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:40:01 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:40:20 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:40:43 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:40:52 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:41:33 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:41:43 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:41:43 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:42:33 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:42:44 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:43:33 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:43:45 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:44:33 America/Denver] PHP Fatal error:  Can't use method return value in write context in /home1/ketsugic/public_html/sourcesage-code-challenge/classes/Model.php on line 44
+[28-Oct-2015 09:44:39 America/Denver] PHP Parse error:  syntax error, unexpected 'error_reporting' (T_STRING) in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 2
+[28-Oct-2015 09:45:04 America/Denver] PHP Parse error:  syntax error, unexpected 'error_reporting' (T_STRING) in /home1/ketsugic/public_html/sourcesage-code-challenge/test.php on line 2

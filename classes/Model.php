@@ -41,7 +41,7 @@ class Model {
 		// Check if tables exist and create it if not
 		$show_stmt = $this->db->query("SHOW TABLES LIKE '$this->questions_table'");
 		
-		if (empty($show_stmt->fetch())) {
+		if (!($show_stmt->fetch())) {
 			$create_stmt = $this->db->prepare("CREATE TABLE `$this->questions_table` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`name` varchar(255) NOT NULL DEFAULT '',
@@ -53,12 +53,12 @@ class Model {
 
 		$show_stmt = $this->db->query("SHOW TABLES LIKE '$this->answers_table'");
 
-		if (empty($show_stmt->fetch())) {
+		if (!($show_stmt->fetch())) {
 			$create_stmt = $this->db->prepare("CREATE TABLE `$this->answers_table` (
 				`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				`question_id` int(11) unsigned NOT NULL,
 				`name` varchar(255) NOT NULL DEFAULT '',
-				`text` tinytext NOT NULL,
+				`answer` tinytext NOT NULL,
 				PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 			$create_stmt->execute();
