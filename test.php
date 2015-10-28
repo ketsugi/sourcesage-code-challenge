@@ -1,8 +1,8 @@
 <?
+int error_reporting(E_STRICT);
+include 'classes/Model.php';
 
-include 'Model.php';
-
-//phpinfo();
+phpinfo();
 
 try {
 	$a = new Model();

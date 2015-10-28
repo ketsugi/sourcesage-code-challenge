@@ -24,6 +24,9 @@ class QAAPI extends API {
 				}
 				break;
 			case 'POST':
+				if (empty($this->request['name']) || empty($this->request['question'])) {
+					throw new HTTPErrorException('', 400);
+				}
 				$question = $this->model->add_question($this->request['name'], $this->request['question']);
 				return ['http_status' => 201, 'data' => $question];
 				break;
@@ -44,7 +47,11 @@ class QAAPI extends API {
 				}
 				break;
 			case 'POST':
-				$answer = $this->model->add_answer($this->request['question_id'], $this->request['name'], $this->request['answer']);
+				$question_id = intval($this->args[0]);
+				if (empty($question_id) || empty($this->request['name']) || empty($this->request['answer'])) {
+					throw new HTTPErrorException('', 400);
+				}
+				$answer = $this->model->add_answer($question_id, $this->request['name'], $this->request['answer']);
 				return ['http_status' => 201, 'data' => $answer];
 				break;
 			default:

@@ -4,11 +4,284 @@
 	<title>SourceSage Code Challenge - Joel Pan</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+	<style type="text/css">
+	form[name=addQuestion] {
+		margin-bottom: 20px;
+	}
+
+	form[name=addAnswer] {
+		padding: 10px 20px;
+	}
+
+	input.form-control {
+		display: inline-block;
+	}
+
+	input[name=name] {
+		width: 30% !important;
+		border-top-left-radius: 4px !important;
+		border-bottom-left-radius: 4px !important;
+		border-right: 0px;
+	}
+
+	input[name=question], input[name=answer] {
+		width: 70% !important;
+	}
+
+	.badge {
+		float: right;
+	}
+
+	.badge-nonzero {
+	}
+
+	.badge-zero {
+		display: none;
+	}
+
+	// Transitions
+	.question-enter {
+		opacity: 0.01;
+	}
+
+	.question-enter.question-enter-active {
+		opacity: 1;
+		transition: opacity 500ms ease-in;
+	}
+
+	.question-leave {
+		opacity: 1;
+	}
+
+	.question-leave.question-leave-active {
+		opacity: 0.01;
+		transition: opacity 300ms ease-in;
+	}
+	</style>
 </head>
 <body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>StackOverflow Wannabe</h1>
+		</div>
+		<div id="questionList"></div>
+	</div>
+	
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://fb.me/react-0.14.0.js"></script>
+	<script src="https://fb.me/react-dom-0.14.0.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	<!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script-->
+	<!--script src="qa.js"></script-->
 
-<script src="https://fb.me/react-0.14.0.min.js"></script>
-<script src="https://fb.me/react-dom-0.14.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script type="text/babel">
+		var QuestionList = React.createClass({
+			getInitialState: function() {
+				return {
+					"questions": []
+				};
+			},
+			refreshQuestions: function() {
+				$.get('api.php/?request=question', {}, function(data) {
+					this.setState({
+						"questions": data
+					});
+				}.bind(this), 'json');
+			},
+			componentDidMount: function() {
+				this.refreshQuestions();
+				this.setState({
+					"refreshInterval": window.setInterval(function () { this.refreshQuestions() }.bind(this), 60000)
+				});
+			},
+			eachQuestion: function(question) {
+				return (
+					<Question key={question.id} id={question.id} name={question.name} question={question.question}/>
+				)
+			},
+			render: function() {
+				return (
+					<div className="row">
+						<QuestionForm refreshQuestions={this.refreshQuestions.bind(null, this)}/>
+						{this.state.questions.map(this.eachQuestion)}
+					</div>
+				)
+			}
+		});
+
+		var Question = React.createClass({
+			getInitialState: function() {
+				return {
+					"numOfAnswers": 0
+				}
+			},
+			setNumOfAnswers: function(num) {
+				this.setState({ "numOfAnswers": num });
+			},
+			render: function() {
+				return (
+					<div className="panel panel-default" key={this.props.id} index={this.props.id}>
+						<div className="panel-heading">
+							<div className="panel-title">
+								<span className="label label-info">{this.props.name}</span> {this.props.question} <Badge numOfAnswers={this.state.numOfAnswers}/>
+							</div>
+						</div>
+						<AnswerList questionId={this.props.id} setNumOfAnswers={this.setNumOfAnswers.bind()}/>
+					</div>
+				);
+			}
+		});
+
+		var Badge = React.createClass({
+			render: function() {
+				if (this.props.numOfAnswers > 0) {
+					return (
+						<span className="badge badge-nonzero">{this.props.numOfAnswers}</span>
+					);
+				}
+				else {
+					return (
+						<span className="badge badge-zero">{this.props.numOfAnswers}</span>
+					);
+				}
+			}
+		});
+
+		var AnswerList = React.createClass({
+			getInitialState: function() {
+				return {
+					"questionId": this.props.questionId,
+					"answers": []
+				};
+			},
+			componentDidMount: function() {
+				this.refreshAnswers();
+			},
+			refreshAnswers: function() {
+				$.get('api.php/?request=answer/' + this.state.questionId, {}, function(data) {
+					this.setState({
+						"answers": data
+					});
+					this.props.setNumOfAnswers(data.length);
+				}.bind(this), 'json');
+			},
+			eachAnswer: function(answer) {
+				return (
+					<div className="panel-body">
+						<span className="label label-info">{answer.name}</span> {answer.answer}
+					</div>
+				)
+			},
+			render: function() {
+				if (this.state.answers.length === 0) {
+					return (
+						<AnswerForm questionId={this.props.questionId} refreshAnswers={this.refreshAnswers.bind(null, this)}/>
+					);
+				}
+				else {
+					return (
+						<div>
+							{this.state.answers.map(this.eachAnswer)}
+							<AnswerForm questionId={this.props.questionId} refreshAnswers={this.refreshAnswers.bind(null, this)}/>
+						</div>
+					);
+				}
+			}
+		});
+
+		var QuestionForm = React.createClass({
+			addQuestion: function(e) {
+				e.preventDefault();
+				var button = this.refs.SubmitButton;
+				button.toggleState();
+				$.post('api.php/?request=question', { 'name': this.refs.newQuestionName.value, 'question': this.refs.newQuestionQuestion.value }, function(data) {
+					button.toggleState();
+					this.props.refreshQuestions();
+					this.refs.newQuestionName.value = ""
+					this.refs.newQuestionQuestion.value = ""
+				}.bind(this), 'json');
+			},
+			render: function() {
+				return (
+					<form name="addQuestion" onSubmit={this.addQuestion}>
+						<h2>Ask a new question</h2>
+						<div className="input-group">
+							<label htmlFor="name" className="sr-only">Name</label>
+							<input type="text" name="name" maxLength="255" placeholder="Name" className="form-control" ref="newQuestionName"/>
+							<label htmlFor="question" className="sr-only">Question</label>
+							<input type="text" name="question" placeholder="Ask your question here" className="form-control" ref="newQuestionQuestion"/>
+							<span className="input-group-btn">
+								<SubmitButton text="Ask" ref="SubmitButton"/>
+							</span>
+						</div>
+					</form>
+				);
+			}
+		});
+
+		var AnswerForm = React.createClass({
+			addAnswer: function(e) {
+				e.preventDefault();
+				var button = this.refs.SubmitButton;
+				button.toggleState();
+				$.post('api.php/?request=answer/' + this.props.questionId, { 'name': this.refs.newAnswerName.value, 'answer': this.refs.newAnswerAnswer.value }, function(data) {
+					button.toggleState();
+					this.props.refreshAnswers();
+					this.refs.newAnswerName.value = ""
+					this.refs.newAnswerAnswer.value = ""
+				}.bind(this), 'json');
+			},
+			render: function() {
+				return (
+					<form name="addAnswer" onSubmit={this.addAnswer}>
+						<div className="input-group">
+							<label htmlFor="name" className="sr-only">Name</label>
+							<input type="text" name="name" maxLength="255" placeholder="Name" className="form-control" ref="newAnswerName"/>
+							<label htmlFor="answer" className="sr-only">Question</label>
+							<input type="text" name="answer" placeholder="Give your answer here" className="form-control" ref="newAnswerAnswer"/>
+							<span className="input-group-btn">
+								<SubmitButton text="Answer" ref="SubmitButton"/>
+							</span>
+						</div>
+					</form>
+				);
+			}
+		});
+
+		var SubmitButton = React.createClass({
+			getInitialState: function() {
+				return ({
+					"saving": false
+				});
+			},
+			toggleState: function() {
+				this.setState({"saving": !this.state.saving})
+			},
+			renderDefault: function() {
+				return (
+					<button className="btn btn-primary" type="submit">{this.props.text}</button>
+				);
+			},
+			renderSaving: function() {
+				return (
+					<button className="btn btn-warning" disabled="disabled" type="submit">Saving...</button>
+				);
+			},
+			render: function() {
+				if (this.state.saving) {
+					return this.renderSaving();
+				}
+				else {
+					return this.renderDefault();
+				}
+			}
+
+		});
+
+		ReactDOM.render(
+			<QuestionList/>,
+			document.getElementById('questionList')
+		);
+	</script>
 </body>
 </html>
